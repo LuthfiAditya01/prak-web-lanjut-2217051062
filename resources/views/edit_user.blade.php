@@ -21,31 +21,33 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <?php foreach ($users ad $user){ ?>
-                <tr>
-                    <td><?= $user['id'] ?></td>
-                    <td><?= $user['nama'] ?></td>
-                    <td><?= $user['npm'] ?></td>
-                    <td><?= $user['nama_kelas'] ?></td>
-                    <td>
-                        <img src="{{ asset('' . $user->foto) }}" alt="Foto User" width="100">
-                    </td>
-                    <td>
-                        <!-- view -->
-                        <a href="{{ route(user.show, $user['id']) }}" class="button btn-primary btn-sm">View</a>
-                        <!-- edit -->
-                        <a href="{{ route(user.edit, $user['id']) }}" class="button btn-primary btn-sm">Edit</a>
-                        <!-- Delete -->
-                         <form action="{{ route(user.destroy, $user['id'] }}" method="POST" style="display:inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="return confirm Apakah Anda yakin ingin menghapus user ini?')">Delete</button>
-                         </form>                        
-                    </td>
-                </tr>
-        }
-        ?>
+        @foreach ($users as $user)
+            <tr>
+                <td>{{ $user['id'] }}</td>
+                <td>{{ $user['nama'] }}</td>
+                <td>{{ $user['npm'] }}</td>
+                <td>{{ $user['nama_kelas'] }}</td>
+                <td>
+                    <img src="{{ asset($user->foto) }}" alt="Foto User" width="100">
+                </td>
+                <td>
+                    <!-- View -->
+                    <a href="{{ route('user.show', $user['id']) }}" class="button btn-primary btn-sm">View</a>
+                    <!-- Edit -->
+                    <a href="{{ route('user.edit', $user['id']) }}" class="button btn-primary btn-sm">Edit</a>
+                    <!-- Delete -->
+                    <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+
         </tbody>
     </table>
 </div>

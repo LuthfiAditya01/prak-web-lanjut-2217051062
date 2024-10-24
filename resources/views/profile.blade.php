@@ -40,7 +40,7 @@
                 <center><h2>{{ $npm }}</h2></center>
             </div>
             <div class="kelas">
-                <center><h2>{{ $kelas }}</h2></center>
+                <center><h2>{{ $kelas ?? 'Kelas Tidak Ditemukan'}}</h2></center>
             </div>
         </div>
     </div>
