@@ -70,14 +70,38 @@ class UserController extends Controller
     //             'kelas' => $user->kelas->nama_kelas ?? 'Kelas Tidak Ditemukan', 
     //         ]);
     // }
+    // public function store(Request $request){
+    //     $this->userModel->create([
+    //         'nama' => $request->input('nama'),
+    //         'npm' => $request->input('npm'),
+    //         'kelas_id' => $request->input('kelas_id'),
+    //     ]);
+
+    //     return redirect()->to('/user');
+    // }
     public function store(Request $request){
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'npm' => 'required|string|max:255',
+            'kelas_id' => 'required|int',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        
+        if ($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $fotoPath = $foto->move(("upload/img"), $foto);
+        } else {
+            $fotoPath = null;
+        }
+        
         $this->userModel->create([
             'nama' => $request->input('nama'),
             'npm' => $request->input('npm'),
             'kelas_id' => $request->input('kelas_id'),
+            'foto' => $fotoPath,
         ]);
 
-        return redirect()->to('/user');
+        return redirect()->to('/user')->with('success', 'User Berhasil Ditambahkan');
     }
     // public function edit ($id)
     // {

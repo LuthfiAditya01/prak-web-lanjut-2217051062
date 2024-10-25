@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+<a href="{{ route('user_create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
+
 <table>
     <thead>
         <tr>

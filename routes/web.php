@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/profile', [UserController::class, 'profile']);  
-Route::get('/user/create', [UserController::class, 'create']);  
+Route::get('/user/profile', [UserController::class, 'profile']) -> name('user_profile');  
+Route::get('/user/create', [UserController::class, 'create']) -> name('user_create');  
 Route::post('/user/store', [UserController::class,'store']) -> name('user_store');
 Route::get('/user/index', [UserController::class, 'index'])->name('user_index');
 

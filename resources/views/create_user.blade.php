@@ -11,7 +11,7 @@
 
 @section('content')
     <!-- @include('_form') -->
-    <form action="/user/store" method="post">
+    <form action="{{ route('user_store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <label for="nama">Nama : </label>
         <input type="text" name="nama" id="nama"><br><br>
@@ -24,7 +24,10 @@
             @foreach($kelas as $kelasItem)
             <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>
             @endforeach
-        </select>
+        </select><br><br>
+        <label for="foto">Foto: </label>
+        <input type="file" name="foto" id="foto"><br><br><br><br>
+
         
 
         <button type="submit">Submit!</button>
