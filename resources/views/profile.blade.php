@@ -42,6 +42,9 @@
             <div class="kelas">
                 <center><h2>{{ $kelas ?? 'Kelas Tidak Ditemukan'}}</h2></center>
             </div>
+            <div class="jurusan">
+                <center><h2>{{ $jurusan ?? 'Jurusan Tidak Ditemukan'}}</h2></center>
+            </div>
         </div>
     </div>
 </body>

@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('user'))
-        {Schema::create('user', function (Blueprint $table) {
+        Schema::create('fakultas_column', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('npm');
-            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
-            $table->foreignId('jurusan_id')->constrained('jurusan_column');
+            $table->string('nama_fakultas');
             $table->timestamps();
-        });}
+        });
     }
 
     /**
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('fakultas_column');
     }
 };

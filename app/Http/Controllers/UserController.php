@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\UserModel;
+use App\Models\Jurusan;
 
 
 
@@ -12,10 +13,12 @@ class UserController extends Controller
 {
     public $userModel;
     public $kelasModel;
+    public $jurusanModel;
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->kelasModel = new Kelas();
+        $this->jurusanModel = new Jurusan();
     }
     public function index()
     {
@@ -36,13 +39,16 @@ class UserController extends Controller
     return view('profile', $data);
     }
     public function create(){
-        $kelasModel = new Kelas();
+            // $kelasModel = new Kelas();
+            // $jurusanModel = new Jurusan();
 
         $kelas = $this->kelasModel->getKelas();
+        $jurusan = $this->jurusanModel->getJurusan();
 
         $data = [
             'title' => 'Create User',
-            'kelas' => $this->userModel->getUser(),
+            'kelas' => $this->kelasModel->getKelas(),
+            'jurusan' => $this->jurusanModel->getJurusan(),
         ];
 
         return view('create_user', $data);
@@ -84,6 +90,7 @@ class UserController extends Controller
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|max:255',
             'kelas_id' => 'required|int',
+            'jurusan_id' => 'required|int',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
@@ -98,6 +105,7 @@ class UserController extends Controller
             'nama' => $request->input('nama'),
             'npm' => $request->input('npm'),
             'kelas_id' => $request->input('kelas_id'),
+            'jurusan_id' => $request->input('jurusan_id'),
             'foto' => $fotoPath,
         ]);
 
