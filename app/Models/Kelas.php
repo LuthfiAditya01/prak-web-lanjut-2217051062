@@ -10,6 +10,7 @@ class Kelas extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $fillable = ['nama_kelas']; // Ensure 'nama_kelas' is fillable
     protected $table = 'kelas';
 
     public function user()

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('npm');
             $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
-            $table->foreignId('jurusan_id')->constrained('jurusan_column');
+            $table->foreignId('jurusan_id')->constrained('jurusan_column')->onDelete('cascade');
             $table->timestamps();
         });}
     }

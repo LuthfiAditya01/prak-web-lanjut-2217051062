@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jurusan_column', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_jurusan');
-            $table->foreignId('fakultas_id')->constrained('fakultas_column')->onDelete('cascade');
-            $table->timestamps();
-        });
+        // Schema::create('jurusan_column', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('nama_jurusan');
+        //     $table->foreignId('fakultas_id')->constrained('fakultas_column')->onDelete('cascade');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jurusan_column');
+        // Schema::dropIfExists('jurusan_column');
     }
 };

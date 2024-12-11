@@ -11,6 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('fakultas_column', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_fakultas');
+            $table->timestamps();
+        });
+        Schema::create('jurusan_column', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_jurusan');
+            $table->foreignId('fakultas_id')->constrained('fakultas_column')->onDelete('cascade');
+            $table->timestamps();
+        });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,6 +31,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -27,6 +39,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('fakultas_column');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('jurusan_column');
     }
 };
