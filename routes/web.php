@@ -23,6 +23,11 @@ Route::get('/user/create', [UserController::class, 'create']) -> name('user_crea
 Route::post('/user/store', [UserController::class,'store']) -> name('user_store');
 Route::get('/user', [UserController::class, 'index'])->name('user_index');
 Route::get('/show/{id}', [UserController::class, 'show'])->name('users.show');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
 
 // Route::put('/user/{id}', [UserController::class, 'update'])->name(user.udpate)
 // Route::get('/user/delete', [UserController::class, 'edit']) -> name(user.edit);

@@ -35,13 +35,13 @@
         </div>
         <div class="data">
             <div class="name bg-sky-400 my-2 mx-80 font-semibold py-1 rounded-md">
-                <center><h2>{{ $nama }}</h2></center>
+                <center><h2>{{ $user->nama }}</h2></center>
             </div>
             <div class="npm bg-sky-400 my-2 mx-80 font-semibold py-1 rounded-md">
-                <center><h2>{{ $npm }}</h2></center>
+                <center><h2>{{ $user->npm }}</h2></center>
             </div>
             <div class="kelas bg-sky-400 my-2 mx-80 font-semibold py-1 rounded-md">
-                <center><h2>{{ $kelas ?? 'Kelas Tidak Ditemukan'}}</h2></center>
+                <center><h2>{{ $user->nama_kelas ?? 'Kelas Tidak Ditemukan'}}</h2></center>
             </div>
             <div class="jurusan bg-sky-400 my-2 mx-80 font-semibold py-1 rounded-md">
                 <center><h2>{{ $jurusan ?? 'Jurusan Tidak Ditemukan'}}</h2></center>

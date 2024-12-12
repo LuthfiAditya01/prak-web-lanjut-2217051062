@@ -1,53 +1,49 @@
 @extends('layouts.app')
 
-@section ('content')
-<div class="mb-3 mt-2 m-3">
-    <a href="{{ route('user.create') }}" class="btn btn-success">
-        Tambah User
-    </a>
-</div>
-
-<div class="container" mt-5>
-    <h1 class="text-center">List Data</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="col">ID</th>
-                <th class="col">Nama</th>
-                <th class="col">NPM</th>
-                <th class="col">Kelas</th>
-                <th class="col">Foto</th>
-                <th class="col">Aksi</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        @foreach ($users as $user)
-            <tr>
-                <td>{{ $user['id'] }}</td>
-                <td>{{ $user['nama'] }}</td>
-                <td>{{ $user['npm'] }}</td>
-                <td>{{ $user['nama_kelas'] }}</td>
-                <td>
-                    <img src="{{ asset($user->foto) }}" alt="Foto User" width="100">
-                </td>
-                <td>
-                    <!-- View -->
-                    <a href="{{ route('user.show', $user['id']) }}" class="button btn-primary btn-sm">View</a>
-                    <!-- Edit -->
-                    <a href="{{ route('user.edit', $user['id']) }}" class="button btn-primary btn-sm">Edit</a>
-                    <!-- Delete -->
-                    <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
-                            Delete
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-
-        </tbody>
-    </table>
-</div>
+@section('content')
+<body>
+    <div>
+        <!-- Isi Section -->
+        <form action="{{ route('user.update', $user['id']) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+    
+            <div class="container mt-5">
+                <h1 class="text-center">Edit Data</h1>
+    
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="text" class="form-control" name="nama" id="nama" value="{{ old('nama', $user->nama) }}">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="npm" class="form-label">NPM</label>
+                    <input type="text" class="form-control" name="npm" id="npm" value="{{ old('npm', $user->npm) }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="kelas_id">Kelas</label>
+                    <select class="form-select" name="kelas_id" id="kelas_id" required>
+                        @foreach ($kelas as $kelasItem)
+                            <option value="{{ $kelasItem->id }}" {{ $kelasItem->id == $user->kelas_id ? 'selected' : '' }}>
+                                {{ $kelasItem->nama_kelas }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" name="foto" class="form-control">
+                    @if ($user->foto)
+                        <img src="{{ asset($user->foto) }}" alt="User Photo" width="100" class="mt-2">
+                    @endif
+                </div>
+    
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+@endsection

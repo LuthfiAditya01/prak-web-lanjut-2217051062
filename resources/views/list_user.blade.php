@@ -2,7 +2,7 @@
 @section('content')
 <body class="bg-cover bg-no-repeat" style="background-image: url('{{ asset('jjkwp.jpg') }}')">
     <div class="m-72 bg-[#ffa68c] rounded-xl p-5 bg-opacity-75">
-        <a href="{{ route('user_create') }}" class="mb-3 p-2 bg-[#d34e63] rounded-xl font-semibold transition-all ease-in-out bg-opacity-100 hover:p-3 hover:bg-opacity-40">Tambah Pengguna Baru</a><br><br>
+        <a href="{{ route('user_create') }}" class="mb-3 p-2 bg-[#d34e63] rounded-xl font-semibold transition-all ease-in-out bg-opacity-100 hover:p-3 hover:bg-opacity-0">Tambah Pengguna Baru</a><br><br>
 
         <table class="table-fixed w-full border-spacing-2 border border-black">
             <thead class="caption-top">
@@ -23,7 +23,16 @@
                     <td class="hover:bg-[#d34e63] hover:font-bold ease-in-out duration-500  border border-black"><?= $user['nama'] ?></td>
                     <td class="hover:bg-[#d34e63] hover:font-bold ease-in-out duration-500  border border-black"><?= $user['npm'] ?></td>
                     <td class="hover:bg-[#d34e63] hover:font-bold ease-in-out duration-500  border border-black"><?= $user['nama_kelas'] ?></td>
-                    <td class="hover:bg-[#d34e63] hover:font-bold ease-in-out duration-500 border border-black "><a class="mb-3 p-[2px] bg-[#d34e63] rounded-md font-semibold transition-all ease-in-out bg-opacity-100 hover:px-3 hover:bg-opacity-0" href="route('users.show', $user->id) }}">Detail</a></td>
+                    <td class="hover:bg-[#d34e63] hover:font-bold ease-in-out duration-500 border border-black ">
+                        <a class="mb-3 p-[2px] bg-[#d34e63] rounded-md font-semibold transition-all ease-in-out bg-opacity-100 hover:px-3 hover:bg-opacity-0" href="{{route('users.show', $user->id) }}">Detail</a>
+                        <a class="mb-3 p-[2px] bg-black text-white hover:text-black hover:w-full rounded-md font-semibold transition-all ease-in-out bg-opacity-100 hover:px-3 hover:bg-opacity-0" href="{{route('user.edit', $user->id) }}">Edit</a>
+                        <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block;"> 
+                            @csrf 
+                            @method('DELETE') 
+                            <button type="submit" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">Delete</button> 
+                        </form>
+                        <a href="{{route('user.show', $user['id'])}}">View</a>
+                    </td>
                     </tr>
                 <?php
                 }
