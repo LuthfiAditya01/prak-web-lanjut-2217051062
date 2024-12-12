@@ -69,8 +69,25 @@ class UserController extends Controller
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|unique:users,npm|max:255',
             'kelas_id' => 'required|exists:kelas,id',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'jurusan_id' => 'required|exists:jurusan,id',
         ]);
+
+        if ($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $fotoPath = $foto->move(('upload/img'), $foto);
+        } else {
+            $fotoPath = null;
+        }
+
+        $this->userModel->create([
+            'nama' => $request->input('nama'),
+            'npm' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
+            'jurusan_id' => $request->input('jurusan_id'),  // Menyimpan id jurusan
+            'foto' => $fotoPath, // Menyimpan path foto
+            ]);
+            
 
         // Log the exact data being created
         \Log::info('Creating user with data:', $validatedData);
@@ -100,6 +117,17 @@ class UserController extends Controller
             ->withInput();
             dd($validatedData);
     }
+    }
+
+    public function show($id){
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => 'Profile',
+            'user' => $user
+        ];
+
+        return view('profile', $data);
     }
     // public function store(Request $request){
     //     $this->userModel->create([

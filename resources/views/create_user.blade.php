@@ -33,8 +33,8 @@
                     <option value="{{$jurusanItem->id}}">{{$jurusanItem->nama_jurusan}}</option>
                     @endforeach
                 </select><br><br>
-                    {{-- <label for="foto">Foto: </label>
-                    <input type="file" name="foto" id="foto" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-200 file:text-blue-500 hover:file:bg-violet-100"><br><br><br><br> --}}
+                    <label for="foto">Foto: </label>
+                    <input type="file" name="foto" id="foto" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-200 file:text-blue-500 hover:file:bg-violet-100"><br><br><br><br>
         
                 
         
